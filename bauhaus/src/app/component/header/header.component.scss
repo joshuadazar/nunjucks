@@ -1,0 +1,108 @@
+@import "./../../scss/colors.scss";
+@import "./../../scss/typo.scss";
+@import "./../../scss/breakpoints.scss";
+
+header {
+  background: $grey300;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 15px 0;
+  .logo-container {
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin: 0;
+    padding-left: 1rem;
+    flex-wrap: wrap;
+
+    .icon-menu {
+      display: none;
+    }
+  }
+  //menu
+  nav {
+    display: flex;
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      min-width: 100%;
+      max-width: auto;
+      height:90px;
+      margin: 0;
+      margin-top: 1rem;
+      list-style: none;
+      z-index: 3;
+      li{
+        transition: all linear .3s;
+        cursor: pointer;
+        color: $grey1200;
+        font-size: $menu;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+          cursor: pointer;
+          color: $white;
+          font-size: $menu;
+          transition: all linear .6s;
+        }
+      }
+    }
+  }
+
+}
+
+/* menu movil */
+
+.mobile-menu-container {
+  display: none;
+  background: $grey300;
+  height: 100vh;
+  width: 90vw;
+}
+
+/* Submenu */
+
+.submenu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .icon-list-container {
+    background: $grey300;
+    .icon-role {
+      position: relative;
+    }
+  }
+  .women-list {
+    position: relative;
+    display: flex;
+    color: $white;
+    font-size: $menu-item;
+    width:max-content;
+    transform: translateY(-25px);
+    ul {
+      list-style: none;
+      background: $grey300;
+      padding: 20px;
+      li {
+        transition: all linear .3s;
+        cursor: pointer;
+        color: $grey1200;
+        padding-bottom: 0.5em;
+        font-family: 'abel';
+        font-size: $menu-item;
+        &:hover {
+          transition: all linear .3s;
+          cursor: pointer;
+          color: $white;
+        }
+      }
+    }
+  }
+}

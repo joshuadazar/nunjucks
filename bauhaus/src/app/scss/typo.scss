@@ -1,0 +1,21 @@
+@font-face {
+	font-family: 'bau';
+	src: url(../../assets/fonts/bauhaus-std-medium.otf) format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'abel';
+	src: url(../../assets/fonts/Abel-Regular.ttf) format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* tipografias sizes */
+$title-big:6rem;
+$title: 3rem;
+$parragaph:1.2rem;
+$menu:1.7rem;
+$menu-item:1.375rem;
+

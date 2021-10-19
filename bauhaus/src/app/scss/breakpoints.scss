@@ -1,0 +1,20 @@
+//@media----
+$mobile: 480px;
+$tablet: 1100px;
+$desktop: 1600px;
+
+//breakpoints
+
+
+@mixin tablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (max-width: $desktop) {
+    @content;
+  }
+}
+//
