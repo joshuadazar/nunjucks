@@ -4,7 +4,7 @@
     <img class="logo" height="70px" src="../../../assets/img/logo_bauhaus.png" alt="logo">
   </figure>
   <nav>
-    <ul id="menu" class="menu">
+    <ul #menuDesktop (mouseover)="onMenuDesktopOver($event)" id="menu" class="menu">
         <li value="artistas"> <img width="40px" src="../../../assets/img/icon-Artistas.svg"> Artistas </li>
         <li value="arquitectas"><img width="40px" src="../../../assets/img/icon-Arquitectas.svg"> Arquitectas</li>
         <li value="disenadoras"><img width="40px" src="../../../assets/img/icon-Disenadoras.svg"> Diseñadoras</li>
@@ -28,13 +28,13 @@
   <!-- dinamic women list -->
 </ul>
 </section>
-<!-- submenu -->
+<!-- submenu Desktop-->
 <section id="submenu" class="submenu">
 <div id="icon" class="icon-list-container">
   <img style="display:none;" id="iconRole" class="icon-Role" alt="arte">
 </div>
 <div class="women-list-container">
-  <article id="womenList" class="women-list">
+  <article #womenList id="womenList" class="women-list">
     <!-- inyección dinámica de submenu -->
   </article>
 </div>

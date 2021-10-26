@@ -6,13 +6,13 @@ $desktop: 1600px;
 //breakpoints
 
 
-@mixin tablet {
+@mixin mobile {
   @media screen and (max-width: $tablet) {
     @content;
   }
 }
 
-@mixin desktop {
+@mixin tablet {
   @media screen and (max-width: $desktop) {
     @content;
   }

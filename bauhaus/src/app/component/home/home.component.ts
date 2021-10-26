@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild("splash") splash!: ElementRef;
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }
-
+  ngAfterViewInit(): void {
+    this.renderer.setStyle(this.splash.nativeElement, 'display', 'none');
+  }
 }
