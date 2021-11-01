@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,13 @@ export class WomenArrayService {
     ]
   }
 
+  private womenListSubject = new Subject<any>();
+
   constructor() { }
+  watchMenuDesktopStateSubject(): Observable<any> {
+    return this.womenListSubject.asObservable();
+  }
+  setWomenList(status: any) {
+    this.womenListSubject.next(status);
+  }
 }

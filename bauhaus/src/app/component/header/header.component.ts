@@ -16,19 +16,19 @@ export class HeaderComponent implements OnInit {
   //Expressions
 
   mobileMenuState: boolean = false;
+  // domService
 
   constructor(
     private renderer: Renderer2,
-    private service: WomenArrayService
+    private womenService: WomenArrayService
     ) { }
 
   // const header= document.getElementById("header");
   ngOnInit(): void {
   }
+   //dom service
 
-  ngAfterViewInit(): void {
 
-  }
 
     // Sub menu search engine
 
@@ -55,10 +55,8 @@ export class HeaderComponent implements OnInit {
     }
 
     listItemFactory(nameArr:any,roleName=null) {
-      console.log("modo movil",this.mobileMenuState);
       if(this.mobileMenuState===false) {
-        const fragment=`<ul>${nameArr.map((name:any) => `<li>${name}</li>`).join('')}</ul>`
-        this.renderer.setProperty(this.womenList.nativeElement,'innerHTML',fragment)
+        this.renderer.setProperty(this.womenList.nativeElement,'innerHTML',`<ul class="ul">${nameArr.map((name:any) => `<li>${name}</li>`).join('')}</ul>`)
       }
       else {
         // mobileWomenList.innerHTML= `
@@ -72,20 +70,7 @@ export class HeaderComponent implements OnInit {
     onMenuDesktopOver(e:any):void {
       this.mobileMenuState=false;
       if(e.target.nodeName=="LI") {
-        let role= e.target.getAttribute("value")
-        console.log(role);
-        let positionX= window.scrollX + e.target.getBoundingClientRect().left
-        this.changeSubmenuPosition(positionX)
-        // showSubmenu()
-
-        console.log(this.service.womenArray);
-
-        role==='artistas' && this.loadWomenList(this.service.womenArray['artistas']);
-        role==='arquitectas' && this.loadWomenList(this.service.womenArray['arquitectas']);
-        role==='disenadoras' && this.loadWomenList(this.service.womenArray['disenadoras']);
-        role==='escritoras' && this.loadWomenList(this.service.womenArray['escritoras']);
-        role==='fotografas' && this.loadWomenList(this.service.womenArray['fotografas']);
-        role==='maestras' && this.loadWomenList(this.service.womenArray['maestras']);
+        this.womenService.setWomenList(e.target)
       }
     }
 

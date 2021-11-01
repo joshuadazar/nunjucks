@@ -1,0 +1,7 @@
+<ul
+  [ngClass]="{'ul-scroll': _overflowSubmenuMax === true}"
+  [ngStyle]="{'display': _submenuDesktopState ? 'block' : 'none' }"
+  (mouseleave)="_submenuDesktopState=false" #womenList class="ul"
+ >
+  <li  *ngFor="let item of _womenList ">{{item}}</li>
+</ul>

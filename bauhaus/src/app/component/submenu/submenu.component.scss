@@ -1,0 +1,41 @@
+@import '../../scss/colors.scss';
+@import '../../scss/typo.scss';
+//menu styles
+
+ul.ul {
+  list-style: none;
+  background: $grey300 !important;
+  padding: 20px;
+  width:fit-content;
+  max-height: 300px;
+  overflow-y: scroll;
+
+
+
+  li {
+    transition: all linear .3s;
+    cursor: pointer;
+    color: $grey1200;
+    padding-bottom: 0.5em;
+    font-family: 'abel';
+    font-size: $menu-item;
+    &:hover {
+      transition: all linear .3s;
+      cursor: pointer;
+      color: $white;
+    }
+  }
+}
+
+ .ul-scroll::after {
+  content:'▼';
+  font-size: 2rem;
+  top:450px;
+  position: fixed;
+  transform: translate(90px, 50px);
+ }
+ .ul-scroll:hover::after {
+  transform: translate(90px, 70px);
+  transition: transform .5s ease-in;
+
+}

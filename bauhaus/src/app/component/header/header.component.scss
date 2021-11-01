@@ -170,36 +170,25 @@ header {
   width: 100%;
   display: flex;
   flex-direction: column;
+
   .icon-list-container {
     background: $grey300;
     .icon-role {
       position: relative;
     }
   }
-  .women-list {
-    position: relative;
-    display: flex;
-    color: $white;
-    font-size: $menu-item;
-    width:max-content;
-    transform: translateY(-25px);
-    ul {
-      list-style: none;
-      background: $grey300;
-      padding: 20px;
-      li {
-        transition: all linear .3s;
-        cursor: pointer;
-        color: $grey1200;
-        padding-bottom: 0.5em;
-        font-family: 'abel';
-        font-size: $menu-item;
-        &:hover {
-          transition: all linear .3s;
-          cursor: pointer;
-          color: $white;
-        }
-      }
+  .women-list-container {
+    .women-list {
+      position: relative;
+      display: flex;
+      color: $white;
+      font-size: $menu-item;
+      width: max-content;
+      transform: translateY(-25px);
+
+
     }
+
+
   }
 }
