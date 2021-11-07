@@ -56,12 +56,25 @@ export class WomenArrayService {
   }
 
   private womenListSubject = new Subject<any>();
+  private womenListMobileSubject = new Subject<any>();
 
   constructor() { }
-  watchMenuDesktopStateSubject(): Observable<any> {
+
+  // data menu desktop to sumbmenu desktop
+  watchMenuDesktopDataSubject(): Observable<any> {
     return this.womenListSubject.asObservable();
   }
   setWomenList(status: any) {
     this.womenListSubject.next(status);
   }
+
+  // data menu mobile to submenu
+  watchMenuMobileDataSubject(): Observable<any> {
+    return this.womenListMobileSubject.asObservable();
+  }
+  setWomenDataMobile(status: any) {
+    this.womenListMobileSubject.next(status);
+  }
+
+
 }

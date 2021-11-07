@@ -1,6 +1,6 @@
-<header id="header">
+<header (window:resize)="resizeWindow()" id="header">
   <figure class="logo-container">
-    <img class="icon-menu" id="iconMenu" src="../../../assets/img/" alt="logo">
+    <img (click)="toggleMenuMobile()" class="icon-menu" id="iconMenu" src="../../../assets/img/icon-menu.svg" alt="logo">
     <img class="logo" height="70px" src="../../../assets/img/logo_bauhaus.png" alt="logo">
   </figure>
   <nav>
@@ -15,28 +15,23 @@
   </nav>
 </header>
 <!-- mobile menu -->
-<section id="mobileMenuContainer" class="mobile-menu-container">
-<ul id="mobileMenu" class="menu-mobile">
-  <li value="artistasMobile">Artistas <img src="../../../assets/img/icon-Artistas.svg"></li>
-  <li value="arquitectasMobile">Arquitectas <img src="../../../assets/img/icon-Arquitectas.svg"></li>
-  <li value="disenadorasMobile">Diseñadoras <img src="../../../assets/img/icon-Disenadoras.svg"></li>
-  <li value="escritorasMobile">Escritoras <img src="../../../assets/img/icon-Escritoras.svg"></li>
-  <li value="fotografasMobile">Fotógrafas <img src="../../../assets/img/icon-Fotografas.svg"></li>
-  <li value="maestrasMobile">Maestras <img src="../../../assets/img/icon-Maestras.svg"></li>
-</ul>
-<ul id="mobileWomenList" class="mobile-women-list">
+<section #menuMobileContainer  id="mobileMenuContainer" class="mobile-menu-container" [class.show]="_showMenuMobileContainer==true">
+  <ul #menuMobileRoles (click)="loadMenuMobileRoles($event)" id="mobileMenu" class="menu-mobile" [class.show]="_showMenuMobileRoles==true">
+    <li value="artistas">Artistas <img src="../../../assets/img/icon-Artistas.svg"></li>
+    <li value="arquitectas">Arquitectas <img src="../../../assets/img/icon-Arquitectas.svg"></li>
+    <li value="disenadoras">Diseñadoras <img src="../../../assets/img/icon-Disenadoras.svg"></li>
+    <li value="escritoras">Escritoras <img src="../../../assets/img/icon-Escritoras.svg"></li>
+    <li value="fotografas">Fotógrafas <img src="../../../assets/img/icon-Fotografas.svg"></li>
+    <li value="maestras">Maestras <img src="../../../assets/img/icon-Maestras.svg"></li>
+  </ul>
+
   <!-- dinamic women list -->
-</ul>
+  <app-submenu-mobile id="mobileWomenList" class="mobile-women-list"></app-submenu-mobile>
+
 </section>
 <!-- submenu Desktop-->
 <section id="submenu" class="submenu">
-<div id="icon" class="icon-list-container">
-  <img style="display:none;" id="iconRole" class="icon-Role" alt="arte">
-</div>
 <div class="women-list-container">
   <app-submenu></app-submenu>
-  <article  #womenList id="womenList" class="women-list">
-    <!-- inyección dinámica de submenu -->
-  </article>
 </div>
 </section>

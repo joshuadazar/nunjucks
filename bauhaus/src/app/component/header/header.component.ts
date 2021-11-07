@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, AfterViewInit} from '@angular/core';
+import { DOMStateService } from 'src/app/services/domstate.service';
 import {WomenArrayService} from '../../services/women-array.service';
 @Component({
   selector: 'app-header',
@@ -10,75 +11,78 @@ export class HeaderComponent implements OnInit {
   //DOM elements
 
   @ViewChild("menuDesktop") menuDesktop!: ElementRef;
-  @ViewChild("submenuDesktop") submenuDesktop!: ElementRef;
+  @ViewChild("menuMobileContainer") menuMobileContainer!: ElementRef;
   @ViewChild("womenList") womenList!: ElementRef;
+  @ViewChild("menuMobileRoles") menuMobileRoles!: ElementRef;
 
   //Expressions
-
+  _showMobileStatus: boolean = false;
   mobileMenuState: boolean = false;
+  _hideSubmenu:boolean = false;
+
+  _showMenuMobileContainer: boolean = false; //container
+  _showMenuMobileRoles: boolean = false; //menu content
   // domService
 
   constructor(
     private renderer: Renderer2,
-    private womenService: WomenArrayService
+    private womenService: WomenArrayService,
+    private domService: DOMStateService
     ) { }
 
-  // const header= document.getElementById("header");
   ngOnInit(): void {
+    this.watchMenuMobileContainer();
+    this.watchMenuMobileRoles();
+
   }
-   //dom service
+// services watcher
 
+  watchMenuMobileContainer() { //menu container
+    this.domService.watchMenuMobileContainerSubject().subscribe(state=> {
+      console.log(state, 'servicio container');
+      this._showMenuMobileContainer=state;
+    })
+  }
 
+  watchMenuMobileRoles() { // menu roles
+    this.domService.watchMenuMobileRolesSubject().subscribe(state => {
+      this._showMenuMobileRoles=state;
+      console.log('roles servicio', state, "local:", this._showMenuMobileRoles);
+    })
+  }
 
-    // Sub menu search engine
-
-    loadWomenList(roleArr:any, roleName=null) {
-      let arrSize=roleArr.length
-      if(arrSize>12 && !this.mobileMenuState){
-        let result = roleArr.reduce((roleArr:any, item:any, index:any) => {
-          const chunkIndex = Math.floor(index/(arrSize/2))
-          if(!roleArr[chunkIndex]) roleArr[chunkIndex] = []
-          roleArr[chunkIndex].push(item)
-          return roleArr
-        }, [])
-
-        this.renderer.setProperty(this.womenList.nativeElement,'innerHTML',"")
-        this.listItemFactory(result[0])
-        this.listItemFactory(result[1])
-
-      }
-      else{
-        this.renderer.setProperty(this.womenList.nativeElement,'innerHTML',"")
-        this.listItemFactory(roleArr, roleName)
-      }
-
+  onMenuDesktopOver(e:any):void {
+    this.mobileMenuState=false;
+    if(e.target.nodeName=="LI") {
+      this.womenService.setWomenList(e.target)
     }
+  }
 
-    listItemFactory(nameArr:any,roleName=null) {
-      if(this.mobileMenuState===false) {
-        this.renderer.setProperty(this.womenList.nativeElement,'innerHTML',`<ul class="ul">${nameArr.map((name:any) => `<li>${name}</li>`).join('')}</ul>`)
-      }
-      else {
-        // mobileWomenList.innerHTML= `
-        // <li value="closeMenu" class="role-title">${roleName} <div value="closeMenu"> X </div></li>
-        // ${nameArr.map(name => `<li>${name}</li>`).join('')}`;
-      }
+  changeSubmenuPosition(pos:any):void {
+    this.renderer.setStyle(this.womenList.nativeElement, 'position', 'relative');
+    this.renderer.setStyle(this.womenList.nativeElement, 'left', `${pos }px`);
+  }
+
+  //Menu Mobile
+
+  //icon muenu show hide menu
+
+  toggleMenuMobile():void {
+    this.domService.setMenuMobileContainer(!this._showMenuMobileContainer);
+    this.domService.setMenuMobileRoles(true);
+    this.domService.setMenuMobileNames(false);
+  }
+
+  resizeWindow() {
+    this._showMenuMobileContainer=false;
+    this.domService.setSubmenuDesktop(false);
+  }
+
+  loadMenuMobileRoles(e:any) {
+    if(e.target.nodeName==="LI") {
+      this.domService.setMenuMobileRoles(false);
+      this.womenService.setWomenDataMobile(e.target);
     }
-
-    //Menu Desktop
-
-    onMenuDesktopOver(e:any):void {
-      this.mobileMenuState=false;
-      if(e.target.nodeName=="LI") {
-        this.womenService.setWomenList(e.target)
-      }
-    }
-
-    changeSubmenuPosition(pos:any):void {
-      this.renderer.setStyle(this.womenList.nativeElement, 'position', 'relative');
-      this.renderer.setStyle(this.womenList.nativeElement, 'left', `${pos }px`);
-    }
-
-    //Menu Mobile
+  }
 
 }

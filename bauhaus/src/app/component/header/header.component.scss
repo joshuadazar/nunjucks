@@ -27,6 +27,7 @@ header {
     }
 
     @include mobile {
+      align-content: center;
       height:70px;
       display: flex;
     }
@@ -38,7 +39,7 @@ header {
         display: block;
         position: absolute;
         left: 10px;
-        top:5px;
+        top:20px;
         height:50px;
       }
     }
@@ -106,11 +107,12 @@ header {
   width: 90vw;
 
   @include mobile {
-    display: block;
+    display: none;
   }
 
   .menu-mobile {
     @include mobile {
+      display: none;
       list-style: none;
       background: $blue1;
       margin: 0;
@@ -119,9 +121,13 @@ header {
 
       li {
         background: $blue1;
+        box-shadow: 0 0 1px $white;
+        color: $white;
         font-family: 'bau' !important;
+        font-size: $menu-item;
         display: flex;
         justify-content: space-between;
+        padding: 20px;
         align-items: center;
       }
     }
@@ -137,7 +143,6 @@ header {
     padding: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 80vh;
     @include mobile {
       li {
         transition: all linear .3s;
@@ -185,10 +190,10 @@ header {
       font-size: $menu-item;
       width: max-content;
       transform: translateY(-25px);
-
-
     }
-
-
   }
+}
+
+.show {
+  display: block !important;
 }

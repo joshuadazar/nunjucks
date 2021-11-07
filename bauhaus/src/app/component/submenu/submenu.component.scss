@@ -1,8 +1,10 @@
 @import '../../scss/colors.scss';
 @import '../../scss/typo.scss';
+@import '../../scss/breakpoints.scss';
 //menu styles
 
 ul.ul {
+  display: none;
   list-style: none;
   background: $grey300 !important;
   padding: 20px;
@@ -29,13 +31,21 @@ ul.ul {
 
  .ul-scroll::after {
   content:'▼';
-  font-size: 2rem;
+  font-size: 1.5rem;
   top:450px;
   position: fixed;
   transform: translate(90px, 50px);
+
+  @include tablet {
+    top: 530px;
+  }
  }
  .ul-scroll:hover::after {
   transform: translate(90px, 70px);
   transition: transform .5s ease-in;
 
+}
+
+.hide {
+  display: none;
 }

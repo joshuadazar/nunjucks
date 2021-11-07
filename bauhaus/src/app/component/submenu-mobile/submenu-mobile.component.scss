@@ -1,0 +1,50 @@
+@import '../../scss/colors.scss';
+@import '../../scss/typo.scss';
+@import '../../scss/breakpoints.scss';
+
+ul.ul {
+  display: none;
+  list-style: none;
+  background: $grey300 !important;
+  padding: 20px 0 20px 0;
+  width:auto;
+  max-height: 80vh;
+  overflow-y: scroll;
+
+  li {
+    transition: all linear .3s;
+    cursor: pointer;
+    color: $grey1200;
+    box-shadow: 0 0 1px $white;
+    padding:20px;
+    font-family: 'abel';
+    font-size: $menu-item;
+    display: flex;
+    align-items: center;
+    &:hover {
+      transition: all linear .3s;
+      cursor: pointer;
+      color: $white;
+    }
+
+    &:nth-child(1) {
+      background: $blue1;
+      color: $white;
+      display: flex;
+      justify-content:space-between;
+      font-family: 'bau' !important;
+      text-transform: capitalize;
+
+      &::after {
+        content: 'X';
+        color: $white;
+        font-family: verdana;
+        font-size: $menu;
+      }
+    }
+  }
+}
+
+.show {
+  display: block !important;
+}
