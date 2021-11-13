@@ -14,6 +14,7 @@ export class SubmenuMobileComponent implements OnInit {
   public _womenList:any[]=[];
   public _role: string=""
   public _showSubmenu: boolean = false;
+  public _WDService:any[]=['']
   constructor(
     private womenService: WomenArrayService,
     private domService: DOMStateService,
@@ -23,6 +24,13 @@ export class SubmenuMobileComponent implements OnInit {
   ngOnInit(): void {
     this.watchMenuNames();
     this.watchNameDataChange();
+    this.watchWomenMenuData();
+  }
+
+  watchWomenMenuData() { // Women Data menu list
+    this.womenService.getWomenMenuData().subscribe(data => {
+      this._WDService=data;
+    })
   }
 
  //service watchers
@@ -38,17 +46,20 @@ export class SubmenuMobileComponent implements OnInit {
     })
   }
 
-
+  getMenulist(names:any[]) {
+    console.log(names);
+    if (names !== undefined) this._womenList = Object.values(names);
+  }
 
   updateSubmenu(list:any) {
     this._showSubmenu=true;
     this._role= list.getAttribute("value")
-    if(this._role==='artistas') this._womenList= this.womenService.womenArray['artistas'];
-    if(this._role==='arquitectas') this._womenList= this.womenService.womenArray['arquitectas'];
-    if(this._role==='disenadoras') this._womenList= this.womenService.womenArray['disenadoras'];
-    if(this._role==='escritoras') this._womenList= this.womenService.womenArray['escritoras'];
-    if(this._role==='fotografas') this._womenList= this.womenService.womenArray['fotografas'];
-    if(this._role==='maestras') this._womenList= this.womenService.womenArray['maestras'];
+    if(this._role==='artistas') this.getMenulist(this._WDService[2])
+    if(this._role==='arquitectas') this.getMenulist(this._WDService[0]);
+    if(this._role==='disenadoras') this.getMenulist(this._WDService[1]);
+    if(this._role==='escritoras') this.getMenulist(this._WDService[3]);
+    if(this._role==='fotografas') this.getMenulist(this._WDService[4]);
+    if(this._role==='maestras') this.getMenulist(this._WDService[5]);
     if(this._womenList.length>0) this.domService.setMenuMobileNames(true);
   }
 

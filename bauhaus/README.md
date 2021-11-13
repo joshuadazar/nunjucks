@@ -25,3 +25,18 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Firebase Hosting
+
+Setup: in general folder in console type <pre>firebase init hosting</pre> / follow the steps below.
+Deployment: inside folder <pre>dist/bauhaus/</pre> type <pre>firebase deploy --only hosting</pre>
+
+## Firebase Firestore
+
+Setup: <pre>ng add @angular/fire</pre>
+in environment.ts define fireBaseConfig object from https://console.firebase.google.com/u/1/project/bauhaus-db/settings/general/web:Y2ViYzQ4YmMtYmNmMS00MjcwLWExYWUtZWE2YTk5ZmUwYmMy
+in app.module
+- import { AngularFireModule } from '@angular/fire/compat';
+- import { environment } from '../environments/environment';
+in imports array include <pre>AngularFireModule.initializeApp(environment.firebaseConfig)</pre>
+import from women-array.service.ts and use in any component.

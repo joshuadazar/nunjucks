@@ -8,10 +8,10 @@ import { WomenArrayService } from 'src/app/services/women-array.service';
   styleUrls: ['./submenu.component.scss']
 })
 export class SubmenuComponent implements OnInit {
-  _womenList: any = ['uno','dos','tres'];
+  _womenList: any[] = [];
+  _WDService: any[] = ['']
   _submenuDesktopState: boolean = false;
   _overflowSubmenuMax: boolean = false;
-
   //External
 
   //DOM
@@ -24,36 +24,49 @@ export class SubmenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.watchWomenListSubject();
-    this.watchSubmenuDesktop()
+    this.watchSubmenuDesktop();
+    this.watchWomenMenuData();
   }
-  //menu item from header
-  watchWomenListSubject() {
-    this.womenService.watchMenuDesktopDataSubject().subscribe(menuItemData => {
-      this._submenuDesktopState=true;
-      this.updateSubmenu(menuItemData)
+
+  watchWomenMenuData() { // Women Data menu list
+    this.womenService.getWomenMenuData().subscribe(data => {
+      this._WDService=data;
     })
   }
 
-  //on resize window, hide submnenu
-  watchSubmenuDesktop() {
+  watchWomenListSubject() {//menu item from header
+    this.womenService.watchMenuDesktopDataSubject().subscribe(menuItemData => {
+      this._submenuDesktopState=true;
+        this.updateSubmenu(menuItemData)
+    })
+  }
+
+
+  watchSubmenuDesktop() {//on resize window, hide submnenu
     this.domService.watchSumbenuSubject().subscribe(state => {
        this._submenuDesktopState=state;
     })
   }
 
+  getMenulist(names:any[]) {
+    console.log(names);
+    if (names !== undefined) this._womenList = Object.values(names);
+  }
+
   updateSubmenu(menuItemData:any) {
     let role= menuItemData.getAttribute("value")
-        let positionX= window.scrollX + menuItemData.getBoundingClientRect().left
+    let positionX= window.scrollX + menuItemData.getBoundingClientRect().left
 
-        if(role==='artistas') this._womenList= this.womenService.womenArray['artistas'];
-        if(role==='arquitectas') this._womenList= this.womenService.womenArray['arquitectas'];
-        if(role==='disenadoras') this._womenList= this.womenService.womenArray['disenadoras'];
-        if(role==='escritoras') this._womenList= this.womenService.womenArray['escritoras'];
-        if(role==='fotografas') this._womenList= this.womenService.womenArray['fotografas'];
-        if(role==='maestras') this._womenList= this.womenService.womenArray['maestras'];
-
-        this.changeSubmenuPosition(positionX)
-        this._womenList.length>12 ? this._overflowSubmenuMax=true : this._overflowSubmenuMax=false;
+    if (role==='artistas') this.getMenulist(this._WDService[2])
+    if (role==='arquitectas') this.getMenulist(this._WDService[0]);
+    if (role==='disenadoras') this.getMenulist(this._WDService[1]);
+    if (role==='escritoras') this.getMenulist(this._WDService[3]);
+    if (role==='fotografas') this.getMenulist(this._WDService[4]);
+    if (role==='maestras') this.getMenulist(this._WDService[5]);
+    this.changeSubmenuPosition(positionX)
+    this._womenList.length>12 ?
+    this._overflowSubmenuMax=true :
+    this._overflowSubmenuMax=false;
   }
 
   changeSubmenuPosition(pos:any):void {

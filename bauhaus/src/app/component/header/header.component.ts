@@ -33,13 +33,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.watchMenuMobileContainer();
     this.watchMenuMobileRoles();
-
   }
 // services watcher
 
   watchMenuMobileContainer() { //menu container
     this.domService.watchMenuMobileContainerSubject().subscribe(state=> {
-      console.log(state, 'servicio container');
       this._showMenuMobileContainer=state;
     })
   }
@@ -47,7 +45,6 @@ export class HeaderComponent implements OnInit {
   watchMenuMobileRoles() { // menu roles
     this.domService.watchMenuMobileRolesSubject().subscribe(state => {
       this._showMenuMobileRoles=state;
-      console.log('roles servicio', state, "local:", this._showMenuMobileRoles);
     })
   }
 
